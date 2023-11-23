@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Publication Statistics</title>
+    <script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>
+</head>
+<body>
+    <h1>Publication Statistics</h1>
+
+    <h2>WordCloud Data</h2>
+    <img src="{{ cloudData }}" alt="Word Cloud" style="background-color: #f5f5f5; border: 1px solid #ddd; padding: 10px;">
+
+    <div id='myDiv'>
+        <script>
+            var trace1 = {
+                x: {{ years }},
+                y: {{ counts }},
+                mode: 'markers',
+                type: 'bar',
+                name: 'Team A',
+                marker: {
+                    color: ['rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)', 'rgba(44, 160, 101, 0.8)']
+                }
+            };
+
+            var data = [trace1];
+
+            var layout = {
+                xaxis: {
+                    type: 'category',
+                    title: 'Years',
+                    tickfont: {
+                        color: 'rgb(31, 119, 180)'
+                    }
+                },
+                yaxis: {
+                    range: [0, 4],
+                    title: 'Counts',
+                    tickfont: {
+                        color: 'rgb(31, 119, 180)'
+                    }
+                },
+                title: {
+                    text: 'Publication Count for Year',
+                    font: {
+                        color: 'rgb(31, 119, 180)'
+                    }
+                },
+                paper_bgcolor: 'rgba(240, 240, 240, 0.8)',
+                plot_bgcolor: 'rgba(240, 240, 240, 0.8)'
+            };
+
+            Plotly.newPlot('myDiv', data, layout);
+        </script>
+    </div>
+
+    <div id='myDiv2'>
+        <script>
+            var data2 = [{
+                type: "pie",
+                values: {{ pieValues|tojson }},
+                labels: {{ pieLabels|tojson }},
+                textinfo: "label+percent",
+                textposition: "outside",
+                automargin: true,
+                marker: {
+                    colors: ['rgba(152, 0, 0, 0.8)', 'rgba(227, 119, 194, 0.8)', 'rgba(255, 255, 51, 0.8)', 'rgba(102, 45, 145, 0.8)', 'rgba(0, 152, 152, 0.8)', 'rgba(255, 128, 0, 0.8)', 'rgba(0, 0, 255, 0.8)', 'rgba(166, 166, 166, 0.8)', 'rgba(75, 179, 74, 0.8)', 'rgba(196, 30, 58, 0.8)', 'rgba(246, 206, 113, 0.8)', 'rgba(0, 0, 0, 0.8)']
+                },
+                title: {
+                    text: 'Pie Chart For Number Of Authors',
+                    font: {
+                        color: 'rgb(31, 119, 180)'
+                    }
+                }
+            }];
+
+            var layout2 = {
+                height: 350,
+                width: 350,
+                margin: {"t": 0, "b": 0, "l": 0, "r": 0},
+                showlegend: false,
+                paper_bgcolor: 'rgba(240, 240, 240, 0.8)',
+                plot_bgcolor: 'rgba(240, 240, 240, 0.8)'
+            };
+
+            Plotly.newPlot('myDiv2', data2, layout2);
+        </script>
+    </div>
+
+</body>
+</html>
